@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
-    @ExceptionHandler(BadCredentials.class)
+    @ExceptionHandler(ProductNotFound.class)
     public ResponseEntity<ErrorResponse> productNotFound(ProductNotFound exp){
         ErrorResponse errorResponse=new ErrorResponse(404,exp.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);

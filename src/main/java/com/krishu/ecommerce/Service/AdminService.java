@@ -56,22 +56,6 @@ public class AdminService {
         return mapToResponse(product);
     }
 
-    private ProductResponse mapToResponse(Product product){
-        ProductResponse productresponse=new ProductResponse();
-        productresponse.setId(product.getId());
-        productresponse.setName(product.getName());
-        productresponse.setDescription(product.getDescription());
-        productresponse.setCategory(product.getCategory());
-        productresponse.setCurrency(product.getCurrency());
-        productresponse.setCreatedAt(product.getCreatedAt());
-        productresponse.setImageUrls(product.getImageUrls());
-        productresponse.setPrice(product.getPrice());
-        productresponse.setSku(product.getSku());
-        productresponse.setStockQuantity(product.getStockQuantity());
-        productresponse.setUpdateAt(product.getUpdateAt());
-        return productresponse;
-    }
-
     public ProductResponse AdjustStock(String id, StockAdjustQuantity quantity) {
         Product product = productRepo.findById(id)
                 .orElseThrow(() -> new ProductNotFound("Product not found"));
@@ -98,5 +82,21 @@ public class AdminService {
                 .orElseThrow(() -> new ProductNotFound("Product not found"));
         productRepo.delete(product);
         return mapToResponse(product);
+    }
+
+    private ProductResponse mapToResponse(Product product){
+        ProductResponse productresponse=new ProductResponse();
+        productresponse.setId(product.getId());
+        productresponse.setName(product.getName());
+        productresponse.setDescription(product.getDescription());
+        productresponse.setCategory(product.getCategory());
+        productresponse.setCurrency(product.getCurrency());
+        productresponse.setCreatedAt(product.getCreatedAt());
+        productresponse.setImageUrls(product.getImageUrls());
+        productresponse.setPrice(product.getPrice());
+        productresponse.setSku(product.getSku());
+        productresponse.setStockQuantity(product.getStockQuantity());
+        productresponse.setUpdateAt(product.getUpdateAt());
+        return productresponse;
     }
 }
