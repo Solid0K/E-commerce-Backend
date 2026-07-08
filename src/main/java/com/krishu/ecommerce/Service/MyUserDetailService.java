@@ -26,8 +26,6 @@ public class MyUserDetailService implements UserDetailsService {
         if(user.isEmpty()){
             throw new UsernameNotFoundException("User not found");
         }
-
-
         List<SimpleGrantedAuthority> authorities = user.get().getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                 .toList();
@@ -35,7 +33,7 @@ public class MyUserDetailService implements UserDetailsService {
         return org.springframework.security.core.userdetails
                 .User
                 .builder()
-                .username(user.get().getUsername())
+                .username(user.get().getEmail())
                 .password(user.get().getPassword())
                 .authorities(authorities)
                 .build();

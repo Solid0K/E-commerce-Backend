@@ -1,15 +1,15 @@
 package com.krishu.ecommerce.DTO;
 
 public class StockAdjustQuantity {
-    private int Quantity;
+    private int quantity;
 
     public StockAdjustQuantity(){}
 
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
-        Quantity = quantity;
+        this.quantity = quantity;
     }
 }

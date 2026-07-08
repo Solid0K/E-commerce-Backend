@@ -7,7 +7,7 @@ public class ProductRequest {
     private String name;
     private String description;
     private BigDecimal price;
-    private String Category;
+    private String category;
     private int stockQuantity;
     private List<String> imageUrls;
 
@@ -38,11 +38,11 @@ public class ProductRequest {
     }
 
     public String getCategory() {
-        return Category;
+        return category;
     }
 
     public void setCategory(String category) {
-        Category = category;
+        this.category = category;
     }
 
     public int getStockQuantity() {

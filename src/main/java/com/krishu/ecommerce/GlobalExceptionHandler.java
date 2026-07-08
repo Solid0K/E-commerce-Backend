@@ -1,9 +1,6 @@
 package com.krishu.ecommerce;
 
-import com.krishu.ecommerce.CustomExceptions.BadCredentials;
-import com.krishu.ecommerce.CustomExceptions.EmailAlreadyExist;
-import com.krishu.ecommerce.CustomExceptions.InsufficientStock;
-import com.krishu.ecommerce.CustomExceptions.ProductNotFound;
+import com.krishu.ecommerce.CustomExceptions.*;
 import com.krishu.ecommerce.DTO.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +31,18 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InsufficientStock.class)
     public ResponseEntity<ErrorResponse> InsufficientStock(InsufficientStock exp){
         ErrorResponse errorResponse=new ErrorResponse(409,exp.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(UserNotFound.class)
+    public ResponseEntity<ErrorResponse> UserNotFound(UserNotFound exp){
+        ErrorResponse errorResponse=new ErrorResponse(404,exp.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(CartItemNotFoundException.class)
+    public ResponseEntity<ErrorResponse> CartItemNotFound(CartItemNotFoundException exp){
+        ErrorResponse errorResponse=new ErrorResponse(404,exp.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 }
