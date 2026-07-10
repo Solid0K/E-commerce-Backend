@@ -119,4 +119,23 @@ public class CartService {
         cartRepo.save(userCart);
         return mapToCartResponse(userCart);
     }
+
+    public CartResponse removeFromCart(Authentication authentication, String productId) {
+        String email=authentication.getName();
+        User user=userRepo.findByEmail(email).orElseThrow(()->new UserNotFound("User not found"));
+        Cart userCart=getOrCreateCart(user.getId());
+        userCart.getItems().removeIf(item->item.getProductId().equals(productId));
+        userCart.setUpdateAt(LocalDateTime.now());
+        cartRepo.save(userCart);
+        return mapToCartResponse(userCart);
+    }
+
+    public void deleteCart(Authentication authentication) {
+        String email=authentication.getName();
+        User user=userRepo.findByEmail(email).orElseThrow(()->new UserNotFound("User not found"));
+        Cart userCart=getOrCreateCart(user.getId());
+        userCart.getItems().clear();
+        userCart.setUpdateAt(LocalDateTime.now());
+        cartRepo.save(userCart);
+    }
 }

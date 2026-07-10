@@ -32,4 +32,14 @@ public class CartController {
     public ResponseEntity<CartResponse> updateCart(Authentication authentication,@PathVariable String productId,@Valid @RequestBody CartItemRequest request){
         return ResponseEntity.ok(cartService.updateAItem(authentication,productId,request));
     }
+
+    @DeleteMapping("/items/{productId}")
+    public ResponseEntity<CartResponse> deleteOneProduct(Authentication authentication,@PathVariable String productId){
+        return ResponseEntity.ok(cartService.removeFromCart(authentication,productId));
+    }
+
+    @DeleteMapping()
+    public void deleteCart(Authentication authentication){
+        cartService.deleteCart(authentication);
+    }
 }

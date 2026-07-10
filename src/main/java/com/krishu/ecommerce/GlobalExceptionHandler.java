@@ -2,6 +2,7 @@ package com.krishu.ecommerce;
 
 import com.krishu.ecommerce.CustomExceptions.*;
 import com.krishu.ecommerce.DTO.ErrorResponse;
+import com.krishu.ecommerce.Model.Cart;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -42,6 +43,24 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CartItemNotFoundException.class)
     public ResponseEntity<ErrorResponse> CartItemNotFound(CartItemNotFoundException exp){
+        ErrorResponse errorResponse=new ErrorResponse(404,exp.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(UserCartNotFound.class)
+    public ResponseEntity<ErrorResponse> CartNotFound(UserCartNotFound exp){
+        ErrorResponse errorResponse=new ErrorResponse(404,exp.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(CartEmptyException.class)
+    public ResponseEntity<ErrorResponse> CartEmpty(CartEmptyException exp){
+        ErrorResponse errorResponse=new ErrorResponse(400,exp.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ErrorResponse> OrderNotFound(OrderNotFoundException exp){
         ErrorResponse errorResponse=new ErrorResponse(404,exp.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
