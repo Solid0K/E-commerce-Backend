@@ -2,6 +2,8 @@ package com.krishu.ecommerce.Controller;
 
 import com.krishu.ecommerce.DTO.ProductResponse;
 import com.krishu.ecommerce.Service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +23,8 @@ public class UserController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<List<ProductResponse>> getProducts(){
-        return ResponseEntity.ok(userService.getProducts());
+    public ResponseEntity<Page<ProductResponse>> getProducts(Pageable pageable){
+        return ResponseEntity.ok(userService.getProducts(pageable));
     }
 
     @GetMapping("/products/{id}")

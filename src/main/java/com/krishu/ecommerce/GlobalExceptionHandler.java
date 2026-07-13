@@ -64,4 +64,10 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse=new ErrorResponse(404,exp.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
+
+    @ExceptionHandler(InvalidOrderStatusTransitionException.class)
+    public ResponseEntity<ErrorResponse> InvalidOrderStatusTransition(InvalidOrderStatusTransitionException exp){
+        ErrorResponse errorResponse=new ErrorResponse(409,exp.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
 }

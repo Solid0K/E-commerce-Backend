@@ -1,11 +1,15 @@
 package com.krishu.ecommerce.Repository;
 
 import com.krishu.ecommerce.Model.Order;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface OrderRepo extends MongoRepository<Order,String> {
+    Page<Order> findByUserId(String userId, Pageable pageable);
     List<Order> findByUserId(String userId);
+    Optional<Order> findByStripePaymentIntentId(String paymentIntent);
 }

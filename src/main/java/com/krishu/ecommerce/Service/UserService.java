@@ -4,9 +4,10 @@ import com.krishu.ecommerce.CustomExceptions.ProductNotFound;
 import com.krishu.ecommerce.DTO.ProductResponse;
 import com.krishu.ecommerce.Model.Product;
 import com.krishu.ecommerce.Repository.ProductRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,11 +19,9 @@ public class UserService {
         this.productRepo=productRepo;
     }
 
-    public List<ProductResponse> getProducts() {
-        List<Product> activeProducts = productRepo.findByIsActiveTrue();
-        return activeProducts.stream()
-                .map(this::ToResponse)
-                .toList();
+    public Page<ProductResponse> getProducts(Pageable pageable) {
+        Page<Product> activeProducts = productRepo.findByIsActiveTrue(pageable);
+        return activeProducts.map(this::ToResponse);
     }
 
     public ProductResponse getProduct(String id) {
