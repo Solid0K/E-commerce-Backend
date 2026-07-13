@@ -41,6 +41,4 @@ public class AdminController {
     public ResponseEntity<ProductResponse> absoluteDelete(@PathVariable String id){
         return ResponseEntity.ok(adminService.absoluteDelete(id));
     }
-
-
 }

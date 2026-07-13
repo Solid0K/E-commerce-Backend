@@ -1,13 +1,21 @@
 package com.krishu.ecommerce.DTO;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
+
 import java.math.BigDecimal;
 import java.util.List;
 
 public class ProductRequest {
+    @NotBlank
     private String name;
     private String description;
+    @DecimalMin("0.01")
     private BigDecimal price;
+    @NotBlank
     private String category;
+    @PositiveOrZero
     private int stockQuantity;
     private List<String> imageUrls;
 

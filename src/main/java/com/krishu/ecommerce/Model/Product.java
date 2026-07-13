@@ -13,12 +13,13 @@ import java.util.List;
 public class Product {
     @Id
     private String id;
-    @TextIndexed
+    @TextIndexed(weight=2)
     private String name;
     @TextIndexed
     private String description;
     private BigDecimal price;
     private String currency;
+    @TextIndexed
     private String category;
     private List<String> imageUrls;
     private int stockQuantity;

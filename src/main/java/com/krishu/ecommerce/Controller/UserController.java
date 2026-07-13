@@ -5,10 +5,7 @@ import com.krishu.ecommerce.Service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +20,8 @@ public class UserController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<Page<ProductResponse>> getProducts(Pageable pageable){
-        return ResponseEntity.ok(userService.getProducts(pageable));
+    public ResponseEntity<Page<ProductResponse>> getProducts(Pageable pageable,@RequestParam(required = false) String search){
+        return ResponseEntity.ok(userService.getProducts(search,pageable));
     }
 
     @GetMapping("/products/{id}")

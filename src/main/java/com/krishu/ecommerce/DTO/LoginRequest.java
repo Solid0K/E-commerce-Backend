@@ -1,7 +1,11 @@
 package com.krishu.ecommerce.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginRequest {
+    @NotBlank
     private String email;
+    @NotBlank
     private String password;
 
     public LoginRequest(){}
