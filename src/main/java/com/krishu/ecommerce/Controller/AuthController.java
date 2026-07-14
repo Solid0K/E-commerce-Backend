@@ -1,9 +1,11 @@
 package com.krishu.ecommerce.Controller;
 
 import com.krishu.ecommerce.DTO.LoginRequest;
+import com.krishu.ecommerce.DTO.MeResponse;
 import com.krishu.ecommerce.DTO.RegisterRequest;
 import com.krishu.ecommerce.Service.AuthService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,5 +26,10 @@ public class AuthController {
     @GetMapping("/signin")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
         return ResponseEntity.ok(authService.verifyUser(loginRequest));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<MeResponse> getCurrentUser(Authentication authentication) {
+        return ResponseEntity.ok(authService.getCurrentUser(authentication));
     }
 }

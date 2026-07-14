@@ -36,8 +36,8 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable);
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.exceptionHandling(exception->exception.accessDeniedHandler(jwtAccessDeniedHandler).authenticationEntryPoint(jwtAuthenticationEntryPoint));
-        http.authorizeHttpRequests(request->request.requestMatchers("/auth/**","/mock-payment/**")
-                .permitAll().requestMatchers("/admin/**").hasRole("Admin").requestMatchers(HttpMethod.GET, "/products/**").permitAll().anyRequest().authenticated());
+        http.authorizeHttpRequests(request->request.requestMatchers("/auth/signup", "/auth/signin","/mock-payment/**")
+                .permitAll().requestMatchers("/auth/me").authenticated().requestMatchers("/admin/**").hasRole("Admin").requestMatchers(HttpMethod.GET, "/user/products/**").permitAll().anyRequest().authenticated());
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

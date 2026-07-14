@@ -2,11 +2,14 @@ package com.krishu.ecommerce.Service;
 
 import com.krishu.ecommerce.CustomExceptions.BadCredentials;
 import com.krishu.ecommerce.CustomExceptions.EmailAlreadyExist;
+import com.krishu.ecommerce.CustomExceptions.UserNotFound;
 import com.krishu.ecommerce.DTO.LoginRequest;
+import com.krishu.ecommerce.DTO.MeResponse;
 import com.krishu.ecommerce.DTO.RegisterRequest;
 import com.krishu.ecommerce.Model.User;
 import com.krishu.ecommerce.Repository.UserRepo;
 import com.krishu.ecommerce.Role;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +53,16 @@ public class AuthService {
             throw new BadCredentials("Bad Credentials");
         }
         return jwtService.generateToken(user.get().getEmail(),user.get().getRoles());
+    }
+
+    public MeResponse getCurrentUser(Authentication authentication){
+        String email=authentication.getName();
+        User user=userRepo.findByEmail(email).orElseThrow(()->new UserNotFound("User "+email+" not found"));
+
+        MeResponse me=new MeResponse();
+        me.setEmail(user.getEmail());
+        me.setUsername(user.getUsername());
+        me.setRoles(user.getRoles());
+        return me;
     }
 }
