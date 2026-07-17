@@ -23,7 +23,7 @@ public class AuthController {
         authService.registerUser(request);
     }
 
-    @GetMapping("/signin")
+    @PostMapping("/signin")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
         return ResponseEntity.ok(authService.verifyUser(loginRequest));
     }
